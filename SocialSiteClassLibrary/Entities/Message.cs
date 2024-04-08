@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Entities
 {
-    public class Message
+    public class Message : BaseEntity
     {
-        public int Id { get; set; }
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
         public string Text { get; set; }

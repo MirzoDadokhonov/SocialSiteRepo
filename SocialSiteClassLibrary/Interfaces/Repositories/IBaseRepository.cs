@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialSiteClassLibrary.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Interfaces.Repositories
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> where T : BaseEntity
     {
-        T Insert(T element);
-        bool Update(T element);
-        bool Delete(T element);
-        T Get(Guid Id);
-        IEnumerable<T> GetAll();
+        Task<T> InsertAsync(T element, CancellationToken token = default);
+        Task<T> UpdateAsync(T element, CancellationToken token = default);
+        Task<bool> DeleteAsync(T element, CancellationToken token = default);
+        Task<T> GetAsync(Guid Id, CancellationToken token = default);
+        Task<IEnumerable<T>> GetAllAsync(CancellationToken token = default);
     }
 }

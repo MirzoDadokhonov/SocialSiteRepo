@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Entities
 {
-    public class Post : BaseEntity
+    public abstract class BaseEntity
     {
-        public int UserId { get; set; }
-        public string Text { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public BaseEntity()
+        {
+            Id = Guid.NewGuid();
+        }
+        
+        public Guid Id { get; }
     }
 }

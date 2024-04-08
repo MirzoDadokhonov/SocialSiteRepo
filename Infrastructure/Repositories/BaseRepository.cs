@@ -1,32 +1,50 @@
-﻿using SocialSiteClassLibrary.Interfaces.Repositories;
+﻿using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using SocialSiteClassLibrary.Entities;
+using SocialSiteClassLibrary.Interfaces.Repositories;
 
 namespace Infrastructure.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        public bool Delete(T element)
+        private readonly ApplicationDbContext _context;
+        private readonly DbSet<T> _dbSet;
+
+        public BaseRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
-        public T Get(Guid Id)
+        public async Task<T> InsertAsync(T entity, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddAsync(entity, token);
+            await _context.SaveChangesAsync(token);
+            return entity;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<bool> DeleteAsync(T entity, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+            return await _context.SaveChangesAsync(token) > 0;
         }
 
-        public T Insert(T element)
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _dbSet.ToListAsync(token);
         }
 
-        public bool Update(T element)
+        public async Task<T> GetAsync(Guid id, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FindAsync(id, token);
         }
+
+        public async Task<T> UpdateAsync(T entity, CancellationToken token = default)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync(token);
+            return entity;
+        }
+
     }
 }

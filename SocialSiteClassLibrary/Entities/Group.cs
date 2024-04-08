@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Entities
 {
-    public class Group
+    public class Group : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int CreatorId { get; set; }
