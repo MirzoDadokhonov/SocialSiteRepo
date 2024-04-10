@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\SocialSiteClassLibrary\SocialSiteClassLibrary.csproj" />
   </ItemGroup>
 
