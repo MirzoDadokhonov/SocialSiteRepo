@@ -1,4 +1,5 @@
 ﻿using SocialSiteClassLibrary.Entities;
+using SocialSiteClassLibrary.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,31 +8,38 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    internal class CommentService : IBaseService<Comment>
+    public class CommentService : IBaseService<Comment>
     {
-        public Task<Comment> CreateAsync(Comment entity, CancellationToken token = default)
+        private readonly IBaseRepository<Comment> _commentRepository;
+
+        public CommentService(IBaseRepository<Comment> repository)
         {
-            throw new NotImplementedException();
+            _commentRepository = repository;
         }
 
-        public Task<bool> DeleteAsync(Comment entity, CancellationToken token = default)
+        public async Task<Comment> InsertAsync(Comment entity, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.InsertAsync(entity, token);
         }
 
-        public Task<IEnumerable<Comment>> GetAllAsync(CancellationToken token = default)
+        public async Task<bool> DeleteAsync(Comment entity, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.DeleteAsync(entity, token);
         }
 
-        public Task<Comment> GetAsync(Guid id, CancellationToken token = default)
+        public async Task<IEnumerable<Comment>> GetAllAsync(CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.GetAllAsync(token);
         }
 
-        public Task<bool> UpdateAsync(Comment entity, CancellationToken token = default)
+        public async Task<Comment> GetAsync(Guid id, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            return await _commentRepository.GetAsync(id, token);
+        }
+
+        public async Task<Comment> UpdateAsync(Comment entity, CancellationToken token = default)
+        {
+            return await _commentRepository.UpdateAsync(entity, token);
         }
     }
 }
