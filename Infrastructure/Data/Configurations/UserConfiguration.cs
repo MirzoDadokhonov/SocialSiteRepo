@@ -24,7 +24,7 @@ namespace Infrastructure.Data.Configurations
                 .HasMaxLength(50)
                 .IsRequired();
 
-            builder.Property(x => x.Patronymic)
+            builder.Property(x => x.Nickname)
                 .HasMaxLength(50);
 
             //builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Entities
 {
-    public class Message : BaseEntity
+    public class Message : CancellableEntity
     {
         public int SenderId { get; set; }
         public int ReceiverId { get; set; }
