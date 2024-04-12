@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SocialSiteClassLibrary.Entities
 {
-    public class Group : BaseEntity
+    public class CancellableEntity : BaseEntity
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int CreatorId { get; set; }
+        public bool IsCancelled { get; set; }
     }
 }

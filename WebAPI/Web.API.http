@@ -1,0 +1,5 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+
+POST {{Web.API_HostAddress}}/Create/
+Accept: application/json
