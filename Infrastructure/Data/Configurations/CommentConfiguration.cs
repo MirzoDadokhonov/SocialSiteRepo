@@ -10,12 +10,15 @@ namespace Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.UserId)
-                .HasMaxLength(40)
+            builder.HasOne(u => u.User)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(u1 => u1.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
             
-            builder.Property(x => x.PostId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.Post)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(x => x.PostId)
                 .IsRequired();
 
             builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();

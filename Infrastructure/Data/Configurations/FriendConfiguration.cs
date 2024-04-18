@@ -16,12 +16,14 @@ namespace Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.UserId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.User)
+                .WithMany(u => u.Friends)
+                .HasForeignKey(x => x.UserId)
                 .IsRequired();
             
-            builder.Property(x => x.FriendId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.UsersFriend)
+                .WithMany(u => u.Friends)
+                .HasForeignKey(x => x.FriendId)
                 .IsRequired();
 
             builder.Property(x => x.AddedDate).HasDefaultValue(new DateTime()).IsRequired();

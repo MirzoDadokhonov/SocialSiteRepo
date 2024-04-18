@@ -16,12 +16,16 @@ namespace Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.SenderId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.Sender)
+                .WithMany(u => u.SentMessages)
+                .HasForeignKey(x => x.SenderId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
             
-            builder.Property(x => x.ReceiverId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.Receiver)
+                .WithMany(u => u.ReceivedMessages)
+                .HasForeignKey(x => x.ReceiverId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
             
             builder.Property(x => x.Text).HasMaxLength(1000).IsRequired();

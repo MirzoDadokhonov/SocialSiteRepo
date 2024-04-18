@@ -11,5 +11,8 @@ namespace SocialSiteClassLibrary.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int CreatorId { get; set; }
+        public User Creator { get; set; }
+
+        public ICollection<GroupMember> GroupMembers { get; set; }
     }
 }

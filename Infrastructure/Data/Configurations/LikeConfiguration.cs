@@ -16,17 +16,21 @@ namespace Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.UserId)
-                .HasMaxLength(40)
+            builder.HasOne(x => x.User)
+                .WithMany(u => u.Likes)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
             
-            builder.Property(x => x.PostId)
-                .HasMaxLength(40)
-                .IsRequired();
+            builder.HasOne(x => x.Post)
+                .WithMany(p => p.Likes)
+                .HasForeignKey(x => x.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
             
-            builder.Property(x => x.CommentId)
-                .HasMaxLength(40)
-                .IsRequired();
+            builder.HasOne(x => x.Comment)
+                .WithMany(c => c.Likes)
+                .HasForeignKey(x => x.CommentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();
         }

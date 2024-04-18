@@ -23,7 +23,11 @@ namespace Infrastructure.Data.Configurations
             builder.Property(x => x.Description)
                 .HasMaxLength(1000);
 
-            builder.Property(x => x.CreatorId).HasMaxLength(40).IsRequired();
+            builder.HasOne(x => x.Creator)
+                .WithMany(x => x.Groups)
+                .HasForeignKey(x => x.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
         }
     }

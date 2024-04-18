@@ -14,5 +14,7 @@ namespace SocialSiteClassLibrary.Entities
         public Post Post { get; set; }
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public ICollection<Like> Likes { get; set; }
     }
 }
