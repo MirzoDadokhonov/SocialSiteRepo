@@ -19,12 +19,7 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.User)
                 .WithMany(u => u.Friends)
                 .HasForeignKey(x => x.UserId)
-                .IsRequired();
-            
-            builder.HasOne(x => x.UsersFriend)
-                .WithMany(u => u.Friends)
-                .HasForeignKey(x => x.FriendId)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.AddedDate).HasDefaultValue(new DateTime()).IsRequired();
         }
