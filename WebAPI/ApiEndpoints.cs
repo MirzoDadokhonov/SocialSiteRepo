@@ -6,14 +6,8 @@
 
         public static class SocialSite
         {
-            private string _nameOfClass;
-
-            public SocialSite(string nameOfClass)
-            {
-
-            }
-
-            private const string Base = $"{ApiBase}/{df}}";
+            
+            private const string Base = $"{ApiBase}/SocialSite";
             public const string Create = Base;
             public const string Get = $"{Base}/{{id:guid}}";
             public const string GetAll = Base;

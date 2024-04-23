@@ -21,5 +21,6 @@
         public ICollection<Friend> Friends { get; set; }
         public ICollection<Message> SentMessages { get; set; }
         public ICollection<Message> ReceivedMessages { get; set; }
+        public ICollection<BaseEntity> BannedEntities { get; set; }
     }
 }

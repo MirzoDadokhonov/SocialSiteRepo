@@ -6,9 +6,30 @@ namespace Infrastructure.Data.Configurations
 {
     public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
+
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Banned)
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            builder.Property(x => x.BannedDate)
+                .IsRequired();
+
+            builder.Property(x => x.BanReason)
+                .IsRequired();
+
+            builder.HasOne(x => x.Banner)
+                .WithMany(u => (IEnumerable<Comment>)u.BannedEntities)
+                .HasForeignKey(x => x.BannerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Property(x => (x).IsCancelled)
+                .IsRequired();
+
 
             builder.HasOne(u => u.User)
                 .WithMany(c => c.Comments)

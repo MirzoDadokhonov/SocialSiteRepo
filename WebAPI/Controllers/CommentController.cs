@@ -3,6 +3,7 @@ using Application.Services;
 using AutoMapper;
 using Contracts.Requests;
 using Contracts.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialSiteClassLibrary.Entities;
@@ -23,6 +24,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] CreateCommentRequest request, CancellationToken token)
         {
@@ -34,7 +36,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Get(Guid Id, CancellationToken token)
         {
             Comment gotComment = await _service.GetAsync(Id, token);
-             if (gotComment == null)
+            if (gotComment == null)
             {
                 return NotFound();
             }
