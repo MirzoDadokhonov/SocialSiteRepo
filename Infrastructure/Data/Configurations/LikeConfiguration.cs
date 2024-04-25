@@ -20,11 +20,9 @@ namespace Infrastructure.Data.Configurations
                 .HasDefaultValue(false)
                 .IsRequired();
 
-            builder.Property(x => x.BannedDate)
-                .IsRequired();
+            builder.Property(x => x.BannedDate);
 
-            builder.Property(x => x.BanReason)
-                .IsRequired();
+            builder.Property(x => x.BanReason);
 
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<Like>)u.BannedEntities)

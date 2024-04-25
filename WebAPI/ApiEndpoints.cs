@@ -4,7 +4,7 @@
     {
         private const string ApiBase = "api";
 
-        public static class SocialSite
+        public static class Methods
         {
             
             private const string Base = $"{ApiBase}/SocialSite";

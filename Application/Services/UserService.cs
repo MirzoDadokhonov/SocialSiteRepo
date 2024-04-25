@@ -34,6 +34,7 @@ namespace Application.Services
 
         public async Task<User> UpdateAsync(User entity, CancellationToken token = default)
         {
+            
             return await _userRepository.UpdateAsync(entity, token);
         }
     }

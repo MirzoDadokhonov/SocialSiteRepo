@@ -41,6 +41,16 @@ namespace Infrastructure.Repositories
 
         public async Task<T> UpdateAsync(T entity, CancellationToken token = default)
         {
+            /*var myEntity = _dbSet.FirstOrDefault(u => u.Id == entity.Id);
+
+            myEntity = entity;
+            try { 
+                _dbSet.Update(myEntity);
+                await _context.SaveChangesAsync(token);
+            } catch (Exception c) {
+                Console.WriteLine("Error " + c.Message + " " + c.StackTrace);
+            }
+            return myEntity;*/
             _dbSet.Update(entity);
             await _context.SaveChangesAsync(token);
             return entity;

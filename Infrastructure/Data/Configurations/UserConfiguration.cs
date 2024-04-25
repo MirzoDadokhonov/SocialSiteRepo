@@ -20,11 +20,9 @@ namespace Infrastructure.Data.Configurations
                 .HasDefaultValue(false)
                 .IsRequired();
 
-            builder.Property(x => x.BannedDate)
-                .IsRequired();
+            builder.Property(x => x.BannedDate);
 
-            builder.Property(x => x.BanReason)
-                .IsRequired();
+            builder.Property(x => x.BanReason);
 
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<User>)u.BannedEntities)
@@ -47,7 +45,6 @@ namespace Infrastructure.Data.Configurations
             builder.Property(x => x.Email).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Password).HasMaxLength(100).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.FriendId).HasMaxLength(20).IsRequired();
             /*
             builder.HasOne(x => x.Friend)
                 .WithMany(f => f.Users)

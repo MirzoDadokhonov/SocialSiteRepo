@@ -14,7 +14,7 @@ namespace Application.Common.Mapping
     {
         public UserMapProfile() 
         {
-            CreateMap<CreateUserRequest, User>()
+            CreateMap<CreateUserRequest, User>()/*
                 //.ForMember(dest => dest.EmailConfirmed, opt => opt.MapFrom(src => src.Banned))
                 .ForMember(dest => dest.Banned, opt => opt.MapFrom(src => src.Banned))
                 .ForMember(dest => dest.BannedDate, opt => opt.MapFrom(src => src.BannedDate))
@@ -37,7 +37,7 @@ namespace Application.Common.Mapping
                 .ForMember(dest => dest.Posts, null)
                 .ForMember(dest => dest.ReceivedMessages, null)
                 .ForMember(dest => dest.SentMessages, null)
-                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname));
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname))*/;
             CreateMap<User, SingleUserResponse>();                                                                                                                                                                                                                                                                           
         }
     }
