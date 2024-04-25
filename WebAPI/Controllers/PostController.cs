@@ -1,0 +1,48 @@
+﻿using Application.Services;
+using AutoMapper;
+using Azure;
+using Contracts.Requests;
+using Contracts.Responses;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SocialSiteClassLibrary.Entities;
+
+namespace WebAPI.Controllers
+{
+	[Route("api/[controller]")]
+	[ApiController]
+	public class PostController(IMapper mapper, IBaseService<Post> baseService) : ControllerBase
+	{
+		private readonly IBaseService<Post> _service = baseService;
+		private readonly IMapper _mapProfile = mapper;
+
+		[HttpPost]
+		public async Task<IActionResult> Create([FromBody] CreatePostRequest request, CancellationToken token)
+		{
+			var response = await _service.InsertAsync(_mapProfile.Map<Post>(request), token);
+            return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
+        }
+        [Authorize]
+        [HttpPut]
+		public async Task<IActionResult> Update([FromBody] CreatePostRequest request, CancellationToken token)
+		{
+			await _service.UpdateAsync(_mapProfile.Map<Post>(request), token);
+			return Ok();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Get(Guid Id, CancellationToken token)
+		{
+			Post gotComment = await _service.GetAsync(Id, token);
+			if (gotComment == null)
+			{
+				return NotFound();
+			}
+
+			var response = _mapProfile.Map<SinglePostResponse>(gotComment);
+
+			return response == null ? NotFound() : Ok(response);
+		}
+
+	}
+}

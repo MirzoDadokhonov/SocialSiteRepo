@@ -1,10 +1,8 @@
-﻿using Application.Common.Mapping;
-using Application.Services;
+﻿using Application.Services;
 using AutoMapper;
 using Contracts.Requests;
 using Contracts.Responses;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialSiteClassLibrary.Entities;
 
@@ -12,10 +10,10 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : ControllerBase
+    public class CommentController(IMapper mapper, IBaseService<Comment> baseService) : ControllerBase
     {
-        private readonly CommentService _service;
-        private readonly IMapper _mapProfile;
+        private readonly IBaseService<Comment> _service = baseService;
+        private readonly IMapper _mapProfile = mapper;
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCommentRequest request, CancellationToken token)
@@ -43,7 +41,7 @@ namespace WebAPI.Controllers
 
             var response = _mapProfile.Map<SingleCommentResponse>(gotComment);
 
-            return response == null ? NotFound() : Ok(response); 
+            return response == null ? NotFound() : Ok(response);
         }
 
     }

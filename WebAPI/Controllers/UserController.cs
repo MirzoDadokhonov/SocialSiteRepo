@@ -2,13 +2,9 @@
 using AutoMapper;
 using Contracts.Requests;
 using Contracts.Responses;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol;
+using NuGet.Common;
 using SocialSiteClassLibrary.Entities;
-
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -20,10 +16,10 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class UserController : Controller
     {
-        private readonly IBaseService<User> _service;
+        private readonly UserService _service;
         private readonly IMapper _mapProfile;
 
-        public UserController(IMapper mapper, IBaseService<User> service)
+        public UserController(IMapper mapper, UserService service)
         {
             _service = service;
             _mapProfile = mapper;
@@ -36,36 +32,6 @@ namespace WebAPI.Controllers
             var response = await _service.InsertAsync(user, token);
             return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
         }
-
-        //[HttpPost(ApiEndpoints.SocialSite.Create)]
-        //public async Task<IActionResult> Create([FromBody] CreateUserRequest request, CancellationToken token)
-        //{
-        //    Console.WriteLine(request.ToJson());
-
-        //    //User tmp = mapProfile.Map<User>(request);
-        //    User tmp = new()
-        //    {
-        //        Banned = request.Banned,
-        //        Banner = null,
-        //        BannedDate = null,
-        //        BannerId = null,
-        //        BannedEntities = null,
-        //        BanReason = null,
-
-        //        Name = request.Name,
-        //        Surname = request.Surname,
-        //        Nickname = request.Nickname,
-        //        Email = request.Email,
-        //        Password = request.Password,
-        //        PhoneNumber = request.PhoneNumber,
-        //        FriendId = request.FriendId
-        //    };
-        //    Console.WriteLine(tmp.ToJson());
-        //    await service.InsertAsync(tmp, token);
-        //    return Ok();
-        //}
-
-
 
         
         [HttpPut(ApiEndpoints.Methods.Update)]
@@ -111,6 +77,20 @@ namespace WebAPI.Controllers
 
             return Ok(response);
         }
+        /*
+        [HttpGet]
+        public async Task<IActionResult> GetFiltered(CancellationToken token, int postMessageOrLike = 3, int? top = null)
+        {
+            var gotUsers = await _service.GetFilteredAsync(token, postMessageOrLike, top);
 
+            var response = new GetAllUsersResponse()
+            {
+                Items = _mapProfile.Map<IEnumerable<SingleUserResponse>>(gotUsers)
+            };
+
+            return Ok(response); 
+            //List<User> topUsers = await _service.GetAllAsync().Wh
+
+        }*/
     }
 }

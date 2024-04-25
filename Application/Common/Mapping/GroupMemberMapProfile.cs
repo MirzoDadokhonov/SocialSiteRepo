@@ -14,8 +14,8 @@ namespace Application.Common.Mapping
     {
         public GroupMemberMapProfile() 
         {
-            CreateMap<CreateCommentRequest, GroupMember>();
-            CreateMap<GroupMember, SingleCommentResponse>();                                                                                                                                                                                                                                                                           
+            CreateMap<CreateGroupMemberRequest, GroupMember>();
+            CreateMap<GroupMember, SingleGroupMemberResponse>();                                                                                                                                                                                                                                                                           
         }
     }
 }

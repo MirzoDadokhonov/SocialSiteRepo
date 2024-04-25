@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialSiteClassLibrary.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,12 @@ namespace Contracts.Requests
 {
     public class CreateGroupRequest
     {
-        public int UserId { get; set; }
-        public int PostId { get; set; }
-        public string Text { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public bool Banned { get; set; }
+        public DateTime? BannedDate { get; set; }
+        public Guid? BannerId { get; set; }
+        public BanReason? BanReason { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Guid CreatorId { get; set; }
     }
 }

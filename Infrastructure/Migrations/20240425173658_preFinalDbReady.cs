@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class changedBanReasonToNullable : Migration
+    public partial class preFinalDbReady : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,6 +38,42 @@ namespace Infrastructure.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Posts_Users_BannerId",
                 table: "Posts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Users_Users_BannerId",
+                table: "Users");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Users_BannerId",
+                table: "Users");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Posts_BannerId",
+                table: "Posts");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Messages_BannerId",
+                table: "Messages");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Likes_BannerId",
+                table: "Likes");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Groups_BannerId",
+                table: "Groups");
+
+            migrationBuilder.DropIndex(
+                name: "IX_GroupMembers_BannerId",
+                table: "GroupMembers");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Friends_BannerId",
+                table: "Friends");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Comments_BannerId",
+                table: "Comments");
             /*
             migrationBuilder.DropColumn(
                 name: "Discriminator",
@@ -71,32 +107,14 @@ namespace Infrastructure.Migrations
                 name: "Discriminator",
                 table: "Comments");*/
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Users",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Posts",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
+            migrationBuilder.AddColumn<Guid>(
+                name: "UserId",
                 table: "Messages",
                 type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
+                nullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
+                name: "UserId",
                 table: "Likes",
                 type: "uniqueidentifier",
                 nullable: true,
@@ -104,83 +122,43 @@ namespace Infrastructure.Migrations
                 oldType: "uniqueidentifier");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Groups",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "GroupMembers",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Friends",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Comments",
-                type: "uniqueidentifier",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Users_BannerId",
-                table: "Comments",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Friends_Users_BannerId",
-                table: "Friends",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_GroupMembers_Users_BannerId",
-                table: "GroupMembers",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Groups_Users_BannerId",
-                table: "Groups",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Likes_Users_BannerId",
+                name: "PostId",
                 table: "Likes",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
+                type: "uniqueidentifier",
+                nullable: true,
+                oldClrType: typeof(Guid),
+                oldType: "uniqueidentifier");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Messages_Users_BannerId",
+            migrationBuilder.AlterColumn<Guid>(
+                name: "CommentId",
+                table: "Likes",
+                type: "uniqueidentifier",
+                nullable: true,
+                oldClrType: typeof(Guid),
+                oldType: "uniqueidentifier");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_UserId",
                 table: "Messages",
-                column: "BannerId",
-                principalTable: "Users",
-                principalColumn: "Id");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_UserId",
+                table: "Friends",
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Posts_Users_BannerId",
-                table: "Posts",
-                column: "BannerId",
+                name: "FK_Friends_Users_UserId",
+                table: "Friends",
+                column: "UserId",
+                principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Messages_Users_UserId",
+                table: "Messages",
+                column: "UserId",
                 principalTable: "Users",
                 principalColumn: "Id");
         }
@@ -189,86 +167,68 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Users_BannerId",
-                table: "Comments");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Friends_Users_BannerId",
+                name: "FK_Friends_Users_UserId",
                 table: "Friends");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GroupMembers_Users_BannerId",
-                table: "GroupMembers");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Groups_Users_BannerId",
-                table: "Groups");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Likes_Users_BannerId",
-                table: "Likes");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Messages_Users_BannerId",
+                name: "FK_Messages_Users_UserId",
                 table: "Messages");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Posts_Users_BannerId",
-                table: "Posts");
+            migrationBuilder.DropIndex(
+                name: "IX_Messages_UserId",
+                table: "Messages");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Friends_UserId",
+                table: "Friends");
+
+            migrationBuilder.DropColumn(
+                name: "UserId",
+                table: "Messages");
+
+            /*migrationBuilder.AddColumn<string>(
+                name: "Discriminator",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Discriminator",
+                table: "Posts",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Discriminator",
+                table: "Messages",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+            */
+            migrationBuilder.AlterColumn<Guid>(
+                name: "UserId",
+                table: "Likes",
+                type: "uniqueidentifier",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
+                oldClrType: typeof(Guid),
+                oldType: "uniqueidentifier",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Users",
+                name: "PostId",
+                table: "Likes",
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
                 oldClrType: typeof(Guid),
                 oldType: "uniqueidentifier",
                 oldNullable: true);
-            /*
-            migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-            */
+
             migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Posts",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
-            migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "Posts",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Messages",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
-            migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "Messages",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
+                name: "CommentId",
                 table: "Likes",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -283,68 +243,28 @@ namespace Infrastructure.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Groups",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
+
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "Groups",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "GroupMembers",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
+
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "GroupMembers",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Friends",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
+
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "Friends",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-            */
-            migrationBuilder.AlterColumn<Guid>(
-                name: "BannerId",
-                table: "Comments",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier",
-                oldNullable: true);
-            /*
+
             migrationBuilder.AddColumn<string>(
                 name: "Discriminator",
                 table: "Comments",
@@ -352,61 +272,101 @@ namespace Infrastructure.Migrations
                 nullable: false,
                 defaultValue: "");
             */
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_BannerId",
+                table: "Users",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_BannerId",
+                table: "Posts",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_BannerId",
+                table: "Messages",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_BannerId",
+                table: "Likes",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Groups_BannerId",
+                table: "Groups",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupMembers_BannerId",
+                table: "GroupMembers",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_BannerId",
+                table: "Friends",
+                column: "BannerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_BannerId",
+                table: "Comments",
+                column: "BannerId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Comments_Users_BannerId",
                 table: "Comments",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Friends_Users_BannerId",
                 table: "Friends",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GroupMembers_Users_BannerId",
                 table: "GroupMembers",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Groups_Users_BannerId",
                 table: "Groups",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Likes_Users_BannerId",
                 table: "Likes",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Messages_Users_BannerId",
                 table: "Messages",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Users_BannerId",
                 table: "Posts",
                 column: "BannerId",
                 principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Users_Users_BannerId",
+                table: "Users",
+                column: "BannerId",
+                principalTable: "Users",
+                principalColumn: "Id");
         }
     }
 }

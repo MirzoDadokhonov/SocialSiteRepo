@@ -12,10 +12,10 @@ namespace Application.Common.Mapping
 {
     public class MessageMapProfile : Profile
     {
-        public MessageMapProfile() 
+        public MessageMapProfile()
         {
-            CreateMap<CreateCommentRequest, Comment>();
-            CreateMap<Comment, SingleCommentResponse>();                                                                                                                                                                                                                                                                           
+            CreateMap<CreateMessageRequest, Message>();
+            CreateMap<Message, SingleMessageResponse>();
         }
     }
 }

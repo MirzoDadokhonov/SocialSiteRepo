@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using SocialSiteClassLibrary.Entities;
 
 namespace Infrastructure
 {
@@ -11,7 +12,9 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            //services.AddTransient(typeof(IBaseRepository<User>), typeof(UserRepository));
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

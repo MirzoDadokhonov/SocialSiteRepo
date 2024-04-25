@@ -14,8 +14,8 @@ namespace Application.Common.Mapping
     {
         public LikeMapProfile() 
         {
-            CreateMap<CreateCommentRequest, Comment>();
-            CreateMap<Comment, SingleCommentResponse>();                                                                                                                                                                                                                                                                           
+            CreateMap<CreateLikeRequest, Like>();
+            CreateMap<Like, SingleLikeResponse>();                                                                                                                                                                                                                                                                           
         }
     }
 }

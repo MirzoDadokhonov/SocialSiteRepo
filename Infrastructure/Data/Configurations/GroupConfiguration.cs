@@ -24,11 +24,7 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(x => x.BanReason);
 
-            builder.HasOne(x => x.Banner)
-                .WithMany(u => (IEnumerable<Group>)u.BannedEntities)
-                .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.NoAction);
-            
+            builder.Property(x => x.BannerId);
 
             builder.Property(x => x.Name)
                 .HasMaxLength(50)

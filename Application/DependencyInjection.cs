@@ -11,6 +11,13 @@ namespace Application
         {
             services.AddScoped<IBaseService<Comment>, CommentService>();
             services.AddScoped<IBaseService<User>, UserService>();
+            services.AddScoped<IBaseService<Friend>, FriendService>();
+            services.AddScoped<IBaseService<Group>, GroupService>();
+            services.AddScoped<IBaseService<GroupMember>, GroupMemberService>();
+            services.AddScoped<IBaseService<Like>, LikeService>();
+            services.AddScoped<IBaseService<Message>, MessageService>();
+            services.AddScoped<IBaseService<Post>, PostService>();
+            services.AddScoped<IBaseService<User>, UserService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }

@@ -24,30 +24,17 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(x => x.BanReason);
 
-            builder.HasOne(x => x.Banner)
-                .WithMany(u => (IEnumerable<Like>)u.BannedEntities)
-                .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(x => x.BannerId);
 
-            
+
             builder.Property(x => (x).IsCancelled)
                 .IsRequired();
 
-            builder.HasOne(x => x.User)
-                .WithMany(u => u.Likes)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            builder.Property(x => x.UserId);
             
-            builder.HasOne(x => x.Post)
-                .WithMany(p => p.Likes)
-                .HasForeignKey(x => x.PostId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(x => x.PostId);
             
-            builder.HasOne(x => x.Comment)
-                .WithMany(c => c.Likes)
-                .HasForeignKey(x => x.CommentId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(x => x.CommentId);
 
             builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();
         }

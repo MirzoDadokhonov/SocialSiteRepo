@@ -37,5 +37,11 @@ namespace Application.Services
             
             return await _userRepository.UpdateAsync(entity, token);
         }
+        /*
+        public async Task<IEnumerable<User>> GetFilteredAsync(CancellationToken token, int postMessageOrLike = 3,  int? top = null)
+        {
+            
+            return await _userRepository.GetFilteredAsync(token, postMessageOrLike, top);
+        }*/
     }
 }

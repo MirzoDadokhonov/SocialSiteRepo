@@ -1,11 +1,16 @@
-﻿namespace Contracts.Responses
+﻿using SocialSiteClassLibrary.Enums;
+
+namespace Contracts.Responses
 {
     public class SingleFriendResponse
     {
         public Guid Id { get; set; }
-        public int UserId { get; set; }
-        public int PostId { get; set; }
-        public string Text { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public bool Banned { get; set; }
+        public DateTime? BannedDate { get; set; }
+        public Guid? BannerId { get; set; }
+        public BanReason? BanReason { get; set; }
+        public Guid UserId { get; set; }
+        public Guid FriendId { get; set; }
+        public DateTime AddedDate { get; set; }
     }
 }

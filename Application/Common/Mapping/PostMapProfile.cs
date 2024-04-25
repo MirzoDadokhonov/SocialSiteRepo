@@ -14,8 +14,8 @@ namespace Application.Common.Mapping
     {
         public PostMapProfile() 
         {
-            CreateMap<CreateCommentRequest, Comment>();
-            CreateMap<Comment, SingleCommentResponse>();                                                                                                                                                                                                                                                                           
+            CreateMap<CreatePostRequest, Post>();
+            CreateMap<Post, SinglePostResponse>();                                                                                                                                                                                                                                                                           
         }
     }
 }
