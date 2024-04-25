@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Configurations
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
-        {/*
+        {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Banned)
@@ -29,8 +29,8 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<User>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
-            */
+                .OnDelete(DeleteBehavior.NoAction);
+            
 
             builder.Property(x => x.Name)
                 .HasMaxLength(50)
@@ -47,11 +47,13 @@ namespace Infrastructure.Data.Configurations
             builder.Property(x => x.Email).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Password).HasMaxLength(100).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(20).IsRequired();
-
+            builder.Property(x => x.FriendId).HasMaxLength(20).IsRequired();
+            /*
             builder.HasOne(x => x.Friend)
                 .WithMany(f => f.Users)
                 .HasForeignKey(x => x.FriendId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction)*/
+                
         }
     }
 }

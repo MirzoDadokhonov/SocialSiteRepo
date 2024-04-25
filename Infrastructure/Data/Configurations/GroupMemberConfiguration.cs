@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Configurations
     public class GruoupMemberConfiguration : IEntityTypeConfiguration<GroupMember>
     {
         public void Configure(EntityTypeBuilder<GroupMember> builder)
-        {/*
+        {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Banned)
@@ -29,19 +29,19 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<GroupMember>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
-            */
+                .OnDelete(DeleteBehavior.NoAction);
+            
 
             builder.HasOne(x => x.User)
                 .WithMany(u => u.GroupMembers)
                 .HasForeignKey(x => x.Id)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
             
             builder.HasOne(x => x.Group)
                 .WithMany(g => g.GroupMembers)
                 .HasForeignKey(x => x.GroupId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
             builder.Property(x => x.JoinDate).HasDefaultValue(new DateTime()).IsRequired();

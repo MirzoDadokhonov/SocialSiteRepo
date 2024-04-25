@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Configurations
     public class GroupConfiguration : IEntityTypeConfiguration<Group>
     {
         public void Configure(EntityTypeBuilder<Group> builder)
-        {/*
+        {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Banned)
@@ -29,8 +29,8 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<Group>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
-            */
+                .OnDelete(DeleteBehavior.NoAction);
+            
 
             builder.Property(x => x.Name)
                 .HasMaxLength(50)
@@ -42,7 +42,7 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Creator)
                 .WithMany(x => x.Groups)
                 .HasForeignKey(x => x.CreatorId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
         }

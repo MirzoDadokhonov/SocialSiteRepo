@@ -16,9 +16,9 @@ namespace SocialSiteClassLibrary.Entities
         
         public Guid Id { get; }
         public bool Banned { get; set; }
-        public DateTime BannedDate { get; set; }
-        public Guid BannerId { get; set; }
-        public User Banner { get; set; }
-        public BanReason BanReason { get; set; }
+        public DateTime? BannedDate { get; set; }
+        public Guid? BannerId { get; set; }
+        public User? Banner { get; set; }
+        public BanReason? BanReason { get; set; }
     }
 }

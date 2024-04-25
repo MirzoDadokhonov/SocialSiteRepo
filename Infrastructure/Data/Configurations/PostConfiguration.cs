@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Configurations
     public class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         public void Configure(EntityTypeBuilder<Post> builder)
-        {/*
+        {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Banned)
@@ -29,8 +29,8 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<Post>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
-            */
+                .OnDelete(DeleteBehavior.NoAction);
+            
 
             builder.Property(x => (x).IsCancelled)
                 .IsRequired();
@@ -39,7 +39,7 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.User)
                 .WithMany(u => u.Posts)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
             
             builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();

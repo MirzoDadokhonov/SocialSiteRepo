@@ -24,7 +24,7 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<Comment>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
 
             builder.Property(x => (x).IsCancelled)
@@ -34,7 +34,7 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(u => u.User)
                 .WithMany(c => c.Comments)
                 .HasForeignKey(u1 => u1.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
             
             builder.HasOne(x => x.Post)

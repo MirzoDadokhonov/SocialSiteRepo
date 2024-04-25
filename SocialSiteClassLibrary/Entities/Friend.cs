@@ -9,9 +9,9 @@ namespace SocialSiteClassLibrary.Entities
     public class Friend : CancellableEntity
     {
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public Guid FriendId { get; set; }
         public DateTime AddedDate { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        
     }
 }

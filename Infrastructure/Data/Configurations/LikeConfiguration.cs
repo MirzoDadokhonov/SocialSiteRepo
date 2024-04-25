@@ -13,7 +13,7 @@ namespace Infrastructure.Data.Configurations
     public class LikeConfiguration : IEntityTypeConfiguration<Like>
     {
         public void Configure(EntityTypeBuilder<Like> builder)
-        {/*
+        {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Banned)
@@ -29,27 +29,27 @@ namespace Infrastructure.Data.Configurations
             builder.HasOne(x => x.Banner)
                 .WithMany(u => (IEnumerable<Like>)u.BannedEntities)
                 .HasForeignKey(x => x.BannerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
-            */
+            
             builder.Property(x => (x).IsCancelled)
                 .IsRequired();
 
             builder.HasOne(x => x.User)
                 .WithMany(u => u.Likes)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
             
             builder.HasOne(x => x.Post)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(x => x.PostId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
             
             builder.HasOne(x => x.Comment)
                 .WithMany(c => c.Likes)
                 .HasForeignKey(x => x.CommentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(x => x.CreatedDate).HasDefaultValue(new DateTime()).IsRequired();
         }
