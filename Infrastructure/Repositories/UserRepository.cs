@@ -4,10 +4,11 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using SocialSiteClassLibrary.Entities;
 using SocialSiteClassLibrary.Interfaces.Repositories;
+using System.Linq;
 
 namespace Infrastructure.Repositories
 {
-    public class UserRepository : IBaseRepository<User>
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<User> _dbSet;
@@ -49,6 +50,26 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<User>> GetFilteredAsync(CancellationToken token, int postMessageOrLike = 3, int? top = null)
         {
+            /*
+            if (postMessageOrLike == 1)
+            {
+                var ans = await Task.FromResult(
+                    _context.Users.Join()
+                );
+            }
+            else if (postMessageOrLike == 2)
+            {
+
+            }
+            else if (postMessageOrLike == 3)
+            {
+
+            }
+            else
+            {
+                return null;
+            }*/
+                
             return null;
         }
     }

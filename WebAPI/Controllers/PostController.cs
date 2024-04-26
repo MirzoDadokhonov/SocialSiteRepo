@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 			var response = await _service.InsertAsync(_mapProfile.Map<Post>(request), token);
             return CreatedAtAction(nameof(Create), new { id = response.Id }, response);
         }
-        [Authorize]
+
         [HttpPut]
 		public async Task<IActionResult> Update([FromBody] CreatePostRequest request, CancellationToken token)
 		{

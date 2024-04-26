@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 			return Ok();
 		}
 
-		[Authorize]
+
 		[HttpPut]
 		public async Task<IActionResult> Update([FromBody] CreateLikeRequest request, CancellationToken token)
 		{

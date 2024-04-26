@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 			return Ok();
 		}
 
-		[Authorize]
+
 		[HttpPut]
 		public async Task<IActionResult> Update([FromBody] CreateFriendRequest request, CancellationToken token)
 		{

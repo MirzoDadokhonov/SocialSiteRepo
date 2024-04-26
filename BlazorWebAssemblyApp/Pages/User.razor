@@ -1,8 +1,33 @@
-﻿@page "/users"
+﻿﻿
+@page "/user"
 @using BlazorWebAssemblyApp.Service
-
-
-<h3>User</h3>
+@using Contracts.Responses.SingleUserResponse
+<h3>user</h3>
 
 <h3>Data from RESTful API</h3>
 
+@if (data != null)
+{
+        <ul>
+        @foreach (var item in data)
+        {
+                    <li>@item.Name</li>
+        }
+        </ul>
+}
+else
+{
+        <p>Loading data...</p>
+}
+
+@code {
+    private IEnumerable<SingleUserResponse> data;
+
+    [Inject]
+    private ApiService ApiService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await ApiService.Get<SingleUserResponse>("/User/api/SocialSite");
+    }
+}

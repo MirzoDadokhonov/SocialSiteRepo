@@ -14,7 +14,7 @@ namespace Infrastructure
         {
 
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            //services.AddTransient(typeof(IBaseRepository<User>), typeof(UserRepository));
+            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
